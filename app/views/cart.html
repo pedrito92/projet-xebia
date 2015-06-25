@@ -1,0 +1,52 @@
+<div class="panier">
+  <table class="table table-striped table-responsive">
+    <thead>
+    <tr>
+      <th>Titre</th>
+      <th class="text-center">Quantité</th>
+      <th class="text-center">Prix Initial</th>
+      <th class="text-center">Prix Total</th>
+      <th class="text-center"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="book in cart.getAllCart().books">
+      <td>{{book.title}}</td>
+      <td class="text-center">{{book.quantity}}</td>
+      <td class="text-center"><span class="badge">{{book.price}}€</span></td>
+      <td class="text-center"><span class="badge">{{book.price * book.quantity}}€</span></td>
+      <td class="text-center">
+        <div class="close"><span ng-click="cart.removeBook(book)" aria-hidden="true" class="glyphicon glyphicon-remove"></span></div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5"><button ng-click="showLibrary()" class="btn btn-primary btn-block">Ajouter un livre</button></td>
+    </tr>
+    </tbody>
+    <tfoot ng-show="cart.getOffers()">
+    <tr>
+      <td colspan="3">Sous-total</td>
+      <td class="text-center"><span class="badge">{{cart.getAllCart().price}}€</span></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Offre Commercial :</td>
+      <td colspan="2" ng-switch="cart.getOffers().commercialOffer.type">
+        <span ng-switch-when="minus">Réduction de {{cart.getOffers().commercialOffer.value}}€</span>
+        <span ng-switch-when="percentage">Remise de {{cart.getOffers().commercialOffer.value}}%</span>
+        <span ng-switch-when="slice">Remise de {{cart.getOffers().commercialOffer.value}}€ par tranche de {{cart.getOffers().commercialOffer.sliceValue}}€</span>
+      </td>
+      <td class="text-center">- {{cart.getOffers().remise}}€</td>
+      <td></td>
+    </tr>
+    <tr class="info">
+      <td colspan="3">Total</td>
+      <td class="text-center"><span class="badge">{{cart.getAllCart().price - cart.getOffers().remise}}€</span></td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+
+
+
