@@ -15,7 +15,6 @@ angular.module('xebiaApp')
     });
 
     var getCustomersOrders = function (isbn) {
-      console.log("http://henri-potier.xebia.fr/books/"+isbn+"/commercialOffers");
       return $http.get("http://henri-potier.xebia.fr/books/"+isbn+"/commercialOffers")
     };
 
